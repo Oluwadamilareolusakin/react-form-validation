@@ -1,11 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Message = () => {
+const Message = (props) => {
+  const { statusMessage } = props;
     return (
         <div>
-            <h3 className="text-center message"></h3>
+            <h3 className="text-center message">{statusMessage}</h3>
         </div>
     )
 }
 
-export default Message;
+const mapStateToProps = state => ({
+  statusMessage = state.formReducer.statusMessage,
+});
+
+
+export default connect(mapStateToProps)(Message);
