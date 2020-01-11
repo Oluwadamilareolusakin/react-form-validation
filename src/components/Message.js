@@ -11,7 +11,7 @@ const Message = (props) => {
 }
 
 const mapStateToProps = state => ({
-  statusMessage = state.formReducer.statusMessage,
+  statusMessage: state.formReducer.statusMessage,
 });
 
 
