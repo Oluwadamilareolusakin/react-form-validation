@@ -15,33 +15,34 @@ class Form extends Component {
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
+      e.preventDefault;e
       const { setMessageToComplete, setMessageToIncomplete } = this.props;
       const { isEmailValid, isNameValid, isPhoneValid, isUrlValid } = this.state;
       if (isEmailValid && isNameValid && isPhoneValid && isUrlValid) {
         setMessageToComplete();
         return;
       } 
-
+      console.log(this.state)
       setMessageToIncomplete();
     }
 
     handleChange(e) {
       let regex;
 
-      if (e.id === "name") {
+      if (e.target.id === "name") {
         regex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g
         this.setState({isNameValid: regex.test(e.target.value)});
       }
-      if (e.id === "email") {
+      if (e.target.id === "email") {
         regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         this.setState({isEmailValid: regex.test(e.target.value)});
       }
-      if (e.id === "phone") {
+      if (e.target.id === "phone") {
         regex = /^\d+$/;
         this.setState({isPhoneValid: regex.test(e.target.value)});
       }
-      if (e.id === "url") {
+      if (e.target.id === "url") {
         regex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
         this.setState({isUrlValid: regex.test(e.target.value)});
       }
@@ -55,15 +56,15 @@ class Form extends Component {
                 <h3>Name:
                 </h3>
                 <input id="name" type="text" onChange={(event) => this.handleChange(event)}/>
-                <input id="email" type="text" />
-                <input id="phone" type="text" />
-                <input id="url" type="text" />
                 <h3>Email:
                 </h3>
+                <input id="email" type="text" onChange={(event) => this.handleChange(event)}/>
                 <h3>Phone:
                 </h3>
+                <input id="phone" type="text" onChange={(event) => this.handleChange(event)}/>
                 <h3>Blog URL:
                 </h3>
+                <input id="url" type="text" onChange={(event) => this.handleChange(event)}/>
                 <div className="small-6 small-centered text-center columns">
                     <a href="#" className="button success expand round text-center" onClick={this.handleSubmit}>Verify</a>
                 </div>
